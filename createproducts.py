@@ -4,7 +4,7 @@ import requests
 import glob
 import pandas as pd
 import numpy
-
+import time
 
 
 def convert(o):
@@ -40,10 +40,24 @@ def createProducts(configuration):
                 }
 
                 response = requests.request("POST", url, headers=headers, data=payload)
+
+                if response.ok:
+                    print(invfiledata['name'][inv_line])
+                    with open(configuration.logs_path + "\\reebelo_log.txt", "a") as file:
+                        file.write(f"{time.ctime(time.time())} SUCCESS  {invfiledata['name'][inv_line]}    {invfiledata['sku'][inv_line]}   {invfiledata['price'][inv_line]}    {invfiledata['stock'][inv_line]}\n")
+
+
+                else:
+                    with open(configuration.logs_path + "\\reebelo_log.txt", "a") as file:
+                        file.write(f"{time.ctime(time.time())}  ERROR {response.text}  {invfiledata['name'][inv_line]} {invfiledata['sku'][inv_line]}  {invfiledata['price'][inv_line]}    {invfiledata['stock'][inv_line]}\n")
+
+
                 print(response)
 
         base_filename = current_file.split("\\")
         os.rename(current_file, archive_path + base_filename[-1])
+
+    time_stamp = time.time()
     print('inv completed')
 # Testing Purposes
 # createProducts(getconfiguration())

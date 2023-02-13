@@ -21,10 +21,12 @@ import time
 # print(time.ctime(last_run_inventory))
 
 while True:
+    current_time = time.time()
     try:
-        createProducts(getconfiguration())
         uploadTracking(getconfiguration())
         retrieveOrders(getconfiguration())
+        createProducts(getconfiguration())
+
         time.sleep(300)
     except:
         time.sleep(30)

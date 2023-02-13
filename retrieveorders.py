@@ -2,7 +2,8 @@ import requests
 import json
 import time
 from order_details import order_details
-from config import *
+# from config import *
+
 
 
 def retrieveOrders(configuration):
@@ -20,7 +21,16 @@ def retrieveOrders(configuration):
 
     response = requests.request("GET", url, headers=headers, data=payload)
 
+
     data = json.loads(response.text)
+
+    for order in data['orders']:
+        if order == response.ok:
+            with open(configuration.logs_path + "\\reebelo_log.txt", "a") as file:
+                file.write(f"Order Retrieved'   {order['order_number']} {order['financial_status']}\n")
+        else:
+            with open(configuration.logs_path + "\\reebelo_log.txt", "a") as file:
+                file.write(F"ERROR  {response.text}\n")
 
     for order in data['orders']:
         neworder = order_details()
@@ -69,6 +79,9 @@ def retrieveOrders(configuration):
                     for i in vars(neworder).values():
                         order_file.write(f'{i}\t')
         order_file.close()
+
+
+    time_stamp = time.time()
     print('order download completed')
 
 

@@ -6,7 +6,7 @@ import pandas as pd
 import numpy
 import time
 
-time_stamp = 0
+
 
 def convert(o):
     if isinstance(o, numpy.int64): return int(o)
@@ -42,13 +42,28 @@ def uploadTracking(configuration):
                 }
 
                 response = requests.request("PUT", url, headers=headers, data=payload)
+                time.sleep(1)
+
+                if response.ok:
+                    with open(configuration.logs_path + "\\reebelo_log.txt", "a") as file:
+                        file.write(f"{time.ctime(time.time())}SUCCESS'   {response.text}    {shipfiledata['orderNumber']}   {shipfiledata['carrier']}   {shipfiledata['trackingNumber']}    {shipfiledata['line_id']}   {shipfiledata['quantity']}\n")
+                else:
+                    with open(configuration.logs_path + "\\reebelo_log.txt", "a") as file:
+                        file.write(f"{time.ctime(time.time())}ERROR'    {response.text} {shipfiledata['orderNumber']}   {shipfiledata['carrier']}   {shipfiledata['trackingNumber']}    {shipfiledata['line_id']}   {shipfiledata['quantity']}\n")
+
+
+
                 print(response)
+
+
+
+
 
 
         base_filename = current_file.split("\\")
         os.rename(current_file, archive_path + base_filename[-1])
 
-    global time_stamp
+
     time_stamp = time.time()
 
     print('tracking completed')
