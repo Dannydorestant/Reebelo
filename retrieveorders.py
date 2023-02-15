@@ -1,10 +1,8 @@
 import requests
 import json
-import time
 from order_details import order_details
-# from config import *
-
-
+from datetime import *
+import time
 
 def retrieveOrders(configuration):
     timestr = time.strftime("%Y%m%d-%H%M%S")
@@ -20,7 +18,6 @@ def retrieveOrders(configuration):
     }
 
     response = requests.request("GET", url, headers=headers, data=payload)
-
 
     data = json.loads(response.text)
 
@@ -80,12 +77,8 @@ def retrieveOrders(configuration):
                         order_file.write(f'{i}\t')
         order_file.close()
 
-
-    time_stamp = time.time()
-    print('order download completed')
-
-
-
+    time_stamp = datetime.now()
+    return time_stamp
 
 # Testing Purposes
 # retrieveOrders(getconfiguration())

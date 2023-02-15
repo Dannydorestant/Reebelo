@@ -5,7 +5,7 @@ import glob
 import pandas as pd
 import numpy
 import time
-
+from datetime import *
 
 
 def convert(o):
@@ -51,21 +51,11 @@ def uploadTracking(configuration):
                     with open(configuration.logs_path + "\\reebelo_log.txt", "a") as file:
                         file.write(f"{time.ctime(time.time())}ERROR'    {response.text} {shipfiledata['orderNumber']}   {shipfiledata['carrier']}   {shipfiledata['trackingNumber']}    {shipfiledata['line_id']}   {shipfiledata['quantity']}\n")
 
-
-
-                print(response)
-
-
-
-
-
-
         base_filename = current_file.split("\\")
         os.rename(current_file, archive_path + base_filename[-1])
 
+    time_stamp = datetime.now()
+    return time_stamp
 
-    time_stamp = time.time()
-
-    print('tracking completed')
 # Testing Purposes
 # uploadTracking()

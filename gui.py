@@ -87,7 +87,7 @@ tabs.grid(row=0, column=0)
 
 # Api Credentials Config: ----------------------------------------------------------------------------------------------
 # Canvas - Api Credentials Config
-api_config_canvas = Canvas(api_config_tab)
+api_config_canvas = Canvas(api_config_tab, highlightthickness=0)
 api_config_canvas.grid(row=0, column=0, padx=10, pady=10)
 
 # Edit Settings Section
@@ -105,12 +105,12 @@ current_api_key.grid(row=2, column=0, padx=5, pady=5)
 
 
 # User Input - Api Credentials Config
-input_URL = ttk.Entry(api_config_canvas, width=40)
+input_URL = ttk.Entry(api_config_canvas, width=30)
 if getconfiguration().url is not None:
     input_URL.insert(END, getconfiguration().url)
 input_URL.grid(row=1, column=1, padx=5, pady=5)
 
-input_api_key = ttk.Entry(api_config_canvas, width=40)
+input_api_key = ttk.Entry(api_config_canvas, width=30)
 if getconfiguration().api_key is not None:
     input_api_key.insert(END, getconfiguration().api_key)
 input_api_key.grid(row=2, column=1, padx=5, pady=5)
@@ -120,7 +120,7 @@ test_api_button = ttk.Button(api_config_canvas, text="Test Connection", command=
 test_api_button.grid(row=3, column=0, padx=5, pady=10)
 
 
-api_current_canvas = Canvas(api_config_tab)
+api_current_canvas = Canvas(api_config_tab, highlightthickness=0)
 api_current_canvas.grid(row=1, column=0, padx=10, pady=10)
 
 # Current Settings------------------------------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ display_api_status.grid(row=3, column=1, padx=5, pady=5)
 
 # File Path Configuration ----------------------------------------------------------------------------------------------
 # Canvas - Interval Configuration
-file_path_canvas = Canvas(upload_download_tab)
+file_path_canvas = Canvas(upload_download_tab, highlightthickness=0)
 file_path_canvas.grid(row=1, column=0, padx=10, pady=10)
 
 
@@ -163,12 +163,12 @@ Outbox_path = Label(file_path_canvas, text="Outbox File Path: ")
 Outbox_path.grid(row=2, column=0, padx=5, pady=5)
 
 # Input - File Path Configuration
-input_Inbox_path = ttk.Entry(file_path_canvas, width=40)
+input_Inbox_path = ttk.Entry(file_path_canvas, width=30)
 if getconfiguration().inbox_path is not None:
     input_Inbox_path.insert(END, getconfiguration().inbox_path)
 input_Inbox_path.grid(row=1, column=1, padx=5, pady=5)
 
-input_Outbox_path = ttk.Entry(file_path_canvas, width=40)
+input_Outbox_path = ttk.Entry(file_path_canvas, width=30)
 if getconfiguration().outbox_path is not None:
     input_Outbox_path.insert(END, getconfiguration().outbox_path)
 input_Outbox_path.grid(row=2, column=1, padx=5, pady=5)
@@ -176,7 +176,7 @@ input_Outbox_path.grid(row=2, column=1, padx=5, pady=5)
 
 # Intervals Configuration ----------------------------------------------------------------------------------------------
 # Canvas - Interval Configuration
-interval_canvas = Canvas(upload_download_tab)
+interval_canvas = Canvas(upload_download_tab, highlightthickness=0)
 interval_canvas.grid(row=2, column=0, padx=10, pady=10)
 
 # Labels - Interval Configuration
@@ -189,7 +189,7 @@ shipping_upload_interval.grid(row=2, column=0, padx=5, pady=5)
 inventory_upload_interval = Label(interval_canvas, text="Inventory Upload Interval (mins): ")
 inventory_upload_interval.grid(row=4, column=0, padx=5, pady=5)
 
-# Entry - Interval Configuration
+# Entry - Interval Configuration ---------------------------------------------------------------------------------------
 input_order_download_interval = ttk.Entry(interval_canvas, width=5)
 if getconfiguration().order_interval is not None:
     input_order_download_interval.insert(END, getconfiguration().order_interval)
@@ -205,14 +205,14 @@ if getconfiguration().inv_interval is not None:
     input_inventory_upload_interval.insert(END, getconfiguration().inv_interval)
 input_inventory_upload_interval.grid(row=4, column=1, padx=5, pady=5)
 
-# Labels - Filemask Configuration
+# Labels - Filemask Configuration --------------------------------------------------------------------------------------
 shipping_upload_filemask = Label(interval_canvas, text="Shipping Upload Filemask: ")
 shipping_upload_filemask.grid(row=1, column=0, padx=5, pady=5)
 
 inventory_upload_filemask = Label(interval_canvas, text="Inventory Upload Filemask: ")
 inventory_upload_filemask.grid(row=3, column=0, padx=5, pady=5)
 
-# Entry - Filemask Configuration
+# Entry - Filemask Configuration ---------------------------------------------------------------------------------------
 input_shipping_upload_filemask = ttk.Entry(interval_canvas, width=15)
 if getconfiguration().ship_filemask is not None:
     input_shipping_upload_filemask.insert(END, getconfiguration().ship_filemask)
@@ -226,7 +226,7 @@ input_inventory_upload_filemask.grid(row=3, column=1, padx=5, pady=5)
 
 # Logs Configuration ----------------------------------------------------------------------------------------------
 # Canvas - Interval Configuration
-logs_canvas = Canvas(logs_tab)
+logs_canvas = Canvas(logs_tab, highlightthickness=0)
 logs_canvas.grid(row=2, column=0, padx=10, pady=10)
 
 # Log Text Widget
@@ -252,7 +252,7 @@ input_logs_path.grid(row=0, column=1, padx=5, pady=5)
 
 # Functions Configuration ----------------------------------------------------------------------------------------------
 # Canvas - Functions Configuration
-functions_canvas = Canvas(window)
+functions_canvas = Canvas(window, highlightthickness=0)
 functions_canvas.grid(row=1, column=0)
 
 start_api_button = ttk.Button(functions_canvas, text="Start Service")
